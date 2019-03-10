@@ -1,0 +1,41 @@
+/* flex formats */
+container, clock, remaining, message {
+  display: flex;
+  flex-flow:column;
+  margin: auto; /* center hor and vert */
+}
+
+container {
+  flex-flow: row wrap;
+}
+
+/* colors and fonts */
+body {
+  font-family: "Open Sans",arial,sans-serif;
+}
+
+button {
+  margin: 5px;
+  padding: 5px;
+  font-size: 2em;
+  font-weight: 600;
+}
+
+clock {
+  border-radius: 4px;
+  border: 1px solid #2196F3;
+  width: 300px;
+  height: 300px;
+}
+
+remaining {
+  font-size:10em;
+}
+
+#startButton {
+  color: #005400;
+}
+
+#resetButton {
+  color: #a20b00;
+}
