@@ -1,4 +1,4 @@
-var countDownTime = 3;
+var countDownTime = 30;
 var rounds = 4;
 var breakLength = 5;
 var totalCountDownTime = (countDownTime+1) * rounds; /* +1 because countDownTime includes 0 */
