@@ -1,35 +1,37 @@
-var countDownTime = 30;
+var countDownTime = 3;
 var rounds = 4;
 var breakLength = 5;
 var totalCountDownTime = (countDownTime+1) * rounds; /* +1 because countDownTime includes 0 */
-var totalBreakTime = breakLength * (rounds-1); /* -1 because no break at end*/
-var totalTimeLeft = (totalCountDownTime + totalBreakTime)-1; /* -1 to get the mod working*/
+var totalBreakTime = breakLength * rounds;
+var totalTimeLeft = totalCountDownTime + totalBreakTime;
+var lastSecond = true;
 
 var allRight = new Audio('AllRightGoodForNow.mp3');
 var letsGo = new Audio('LetsGo.mp3');
 var youreDone = new Audio('You-reDone.mp3');
 
-function startTimer() {
-  countDown();
-}
-
 function countDown() {
   for (var round=1; round<=rounds; round++) {
     for (var timer=0;timer<=countDownTime; timer++) {
-      if (totalTimeLeft===(totalCountDownTime + totalBreakTime)-1) {
+      if (lastSecond) {
         // special case: very last count down, done
         window.setTimeout(setTimerDisplay, totalTimeLeft*1000, "&#x2714;", "Round number: " + round, "");
+        lastSecond = false;
       } else {
         window.setTimeout(setTimerDisplay, totalTimeLeft*1000, timer, "Round number: " + round, "");
       }
       totalTimeLeft--;
     }
-    // Don't take a break at the end
-    if (totalTimeLeft > 0) {
-        for (var b=1;b<=breakLength; b++) {
-          window.setTimeout(setTimerDisplay, totalTimeLeft*1000, "&#x23F3;", "", "Left in break: " + b);
-          totalTimeLeft--;
-        }
+    for (var b=breakLength;b>=1; b--) {
+      var leftInBreak = breakLength - b + 1;
+      if (b === totalTimeLeft) {
+        /* get ready, not a break */
+        window.setTimeout(setTimerDisplay, totalTimeLeft*1000, "&#x1f6b6;", "", "Get ready: " + leftInBreak);
+      } else {
+        /* break */
+        window.setTimeout(setTimerDisplay, totalTimeLeft*1000, "&#x23F3;", "", "Left in break: " + leftInBreak);
+      }
+      totalTimeLeft--;
     }
   }
 }
