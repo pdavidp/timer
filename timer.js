@@ -1,7 +1,7 @@
 var countDownTime = 30;
 var rounds = 4;
 var breakLength = 5;
-var totalCountDownTime = (countDownTime+1) * rounds; /* +1 because countDownTime includes 0 */
+var totalCountDownTime = (countDownTime + 1) * rounds; /* +1 because countDownTime includes 0 */
 var totalBreakTime = breakLength * rounds;
 var totalTimeLeft = totalCountDownTime + totalBreakTime;
 var lastSecond = true;
@@ -11,25 +11,25 @@ var letsGo = new Audio('LetsGo.mp3');
 var youreDone = new Audio('You-reDone.mp3');
 
 function countDown() {
-  for (var round=1; round<=rounds; round++) {
-    for (var timer=0;timer<=countDownTime; timer++) {
+  for (var round = 1; round <= rounds; round++) {
+    for (var timer = 0; timer <= countDownTime; timer++) {
       if (lastSecond) {
         // special case: very last count down, done
-        window.setTimeout(setTimerDisplay, totalTimeLeft*1000, "&#x2714;", "Round number: " + round, "");
+        window.setTimeout(setTimerDisplay, totalTimeLeft * 1000, "&#x2714;", "Round number: " + round, "");
         lastSecond = false;
       } else {
-        window.setTimeout(setTimerDisplay, totalTimeLeft*1000, timer, "Round number: " + round, "");
+        window.setTimeout(setTimerDisplay, totalTimeLeft * 1000, timer, "Round number: " + round, "");
       }
       totalTimeLeft--;
     }
-    for (var b=breakLength;b>=1; b--) {
+    for (var b = breakLength; b >= 1; b--) {
       var leftInBreak = breakLength - b + 1;
       if (b === totalTimeLeft) {
         /* get ready, not a break */
-        window.setTimeout(setTimerDisplay, totalTimeLeft*1000, "&#x1f6b6;", "", "Get ready: " + leftInBreak);
+        window.setTimeout(setTimerDisplay, totalTimeLeft * 1000, "&#x1f6b6;", "", "Get ready: " + leftInBreak);
       } else {
         /* break */
-        window.setTimeout(setTimerDisplay, totalTimeLeft*1000, "&#x23F3;", "", "Left in break: " + leftInBreak);
+        window.setTimeout(setTimerDisplay, totalTimeLeft * 1000, "&#x23F3;", "", "Left in break: " + leftInBreak);
       }
       totalTimeLeft--;
     }
@@ -43,7 +43,7 @@ function setTimerDisplay(timeLeftThisRound, roundsRemaining, breakTimeRemaining)
   document.getElementById("resetButton").style.display = "inline-block";
   document.getElementById("startButton").style.display = "none";
 
-  if (timeLeftThisRound===0) {
+  if (timeLeftThisRound === 0) {
     allRight.play();
   } else if (timeLeftThisRound === countDownTime) {
     letsGo.play();
